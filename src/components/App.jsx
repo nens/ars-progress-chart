@@ -117,6 +117,19 @@ class App extends Component {
             data={data.chart}
             margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
           >
+            <Line
+              type="monotone"
+              dataKey="required"
+              stroke="#ccc"
+              strokeWidth="2"
+              dot={false}
+            />
+            <defs>
+              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+              </linearGradient>
+            </defs>
             <XAxis
               tickFormatter={tick => {
                 return `${tick}`;
@@ -136,7 +149,7 @@ class App extends Component {
             <Area
               type="monotone"
               dataKey="done_cumulative"
-              fill="#8884d8"
+              fill="url(#colorUv)"
               stroke="#8884d8"
             />
             <ReferenceLine
@@ -144,13 +157,7 @@ class App extends Component {
               stroke="red"
               // label={`${moment().locale('nl').format("D MMMM YYYY")}`}
             />
-            <Line
-              type="monotone"
-              dataKey="required"
-              stroke="#000000"
-              strokeWidth="2"
-              dot={false}
-            />
+
           </ComposedChart>
         </ResponsiveContainer>
         <ResponsiveContainer width="100%" height={Math.floor(this.state.chartHeight/2)}>
@@ -160,6 +167,12 @@ class App extends Component {
             data={data.chart}
             margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
           >
+            <defs>
+              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+              </linearGradient>
+            </defs>
             <XAxis
               tickFormatter={tick => {
                 return `${tick}`;
@@ -177,7 +190,7 @@ class App extends Component {
 
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip content={<CustomTooltip2 />} />
-            <Bar dataKey="done_this_day" barSize={20} fill="#413ea0" />
+            <Bar dataKey="done_this_day" barSize={20} fill="url(#colorUv)" />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
