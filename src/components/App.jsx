@@ -34,9 +34,10 @@ class CustomTooltip1 extends Component {
             border: "1px solid #ccc"
           }}
         >
-          Dag: {label}<hr />
-          <p>Cumulatief: {`${Math.round(payload[0].value)} km.`}</p>
-          <p>Benodigd: {`${Math.round(payload[1].value)} km.`}</p>
+          Dag: {label}
+          <hr />
+          <p>Cumulatief: {`${Math.round(payload[1].value)} km.`}</p>
+          <p>Benodigd: {`${Math.round(payload[0].value)} km.`}</p>
         </div>
       );
     }
@@ -58,7 +59,8 @@ class CustomTooltip2 extends Component {
             border: "1px solid #ccc"
           }}
         >
-          Dag: {label}<hr />
+          Dag: {label}
+          <hr />
           <p>Dagtotaal: {`${Math.round(payload[0].value)} km.`}</p>
         </div>
       );
@@ -66,7 +68,6 @@ class CustomTooltip2 extends Component {
     return null;
   }
 }
-
 
 class App extends Component {
   constructor() {
@@ -110,7 +111,10 @@ class App extends Component {
 
     return (
       <div>
-        <ResponsiveContainer width="100%" height={Math.floor(this.state.chartHeight/2)}>
+        <ResponsiveContainer
+          width="100%"
+          height={Math.floor(this.state.chartHeight / 2)}
+        >
           <ComposedChart
             width={700}
             height={275}
@@ -126,8 +130,8 @@ class App extends Component {
             />
             <defs>
               <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
               </linearGradient>
             </defs>
             <XAxis
@@ -140,7 +144,7 @@ class App extends Component {
               tickFormatter={tick => {
                 return `${parseInt(tick)} km`;
               }}
-              hide={(this.state.chartHeight > 500) ? false : true}
+              hide={this.state.chartHeight > 500 ? false : true}
               domain={[0, 40075]}
               dataKey="required"
             />
@@ -157,10 +161,12 @@ class App extends Component {
               stroke="red"
               // label={`${moment().locale('nl').format("D MMMM YYYY")}`}
             />
-
           </ComposedChart>
         </ResponsiveContainer>
-        <ResponsiveContainer width="100%" height={Math.floor(this.state.chartHeight/2)}>
+        <ResponsiveContainer
+          width="100%"
+          height={Math.floor(this.state.chartHeight / 2)}
+        >
           <ComposedChart
             width={700}
             height={275}
@@ -169,8 +175,8 @@ class App extends Component {
           >
             <defs>
               <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
               </linearGradient>
             </defs>
             <XAxis
@@ -180,13 +186,10 @@ class App extends Component {
               dataKey="day_number"
             />
             <YAxis
-              hide={(this.state.chartHeight > 500) ? false : true}
+              hide={this.state.chartHeight > 500 ? false : true}
               dataKey="done_this_day"
             />
-            <ReferenceLine
-              y={data.required_distance_per_day}
-              stroke="red"
-            />
+            <ReferenceLine y={data.required_distance_per_day} stroke="red" />
 
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip content={<CustomTooltip2 />} />
